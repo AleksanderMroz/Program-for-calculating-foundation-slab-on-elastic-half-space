@@ -25,8 +25,6 @@ def calkowanieWIJ(X,Y,EP,N,DX,DY,DEP,DP):
     E0=Symbol("E0")
     v=Symbol("v")
 
-
-
     B=1/((((ep-x)**2+(n-y)**2))**0.5)
     Di=1/(DX*DY)
     Dj=1/(DEP*DP)
@@ -60,16 +58,9 @@ def TablicaFki(A,H,m,n):
                     #print();print()
                     #print("OK", i, j)
                     Fki[i][j]=JedenWij(A,H,j*A,i*H)
-
-
                 else:
                     #print("OK", i, j)
                     Fki[i][j] = DrugiWij(A, H, i * A, j * H)
-
-
-
-
-
     return Fki
 
 def Calka(CX,GR,GB):
@@ -91,6 +82,17 @@ def JedenWij(A,H,x,y):
         X = x
         Y -= H/5
     return Sum/25
+
+def DrugiWij(A,H,X,Y):
+    Di = 1 / ((A) * (H))
+    Dj = 1 / ((A) * (H ))
+
+    DX = X
+    DY = Y
+
+    B = 1 / ((DX ** 2 + DY ** 2) ** 0.5)
+    CX = Calka(B, A , H )
+    return CX*Di*Dj
 
 
 
@@ -114,8 +116,6 @@ def TablicaXYEN(A,H,X,Y):
             #print((DX,DY,i,j))
             B=1/((DX**2+DY**2)**0.5)
             CX = Calka(B,A/5,H/5)
-
-
             D[i][j]=Di * Dj * CX
             DX=DX+A/5
         DX=X
@@ -135,11 +135,8 @@ def SamNaSiebie(A,H):
     Z=ln(1+sqrt((c/b)**2+1))
     Y=ln((c/b)+sqrt((c/b)**2 +1 ))
     X=ln(b/c)+ (b/c)*Y + Z
-
     P=2*c/b * X
     P=P/c
-
-
     return P/1.1697
 
 def SamNaSiebieAleObok(A,H,x,y):
@@ -166,19 +163,7 @@ def SamNaSiebieAleObok(A,H,x,y):
     return P1,-P2,-P3,P4,P5,P6
 
 
-def DrugiWij(A,H,X,Y):
-    Di = 1 / ((A) * (H))
-    Dj = 1 / ((A) * (H ))
 
-    DX = X
-    DY = Y
-
-    B = 1 / ((DX ** 2 + DY ** 2) ** 0.5)
-    CX = Calka(B, A , H )
-
-
-
-    return CX*Di*Dj
 
 def Dob():
     # some 3-dim points
@@ -283,26 +268,6 @@ def Dob2(Mac):
 
 
 if __name__ == '__main__':
-    #print(TablicaFki(0.25,0.25,10,10))
-    T1=time.clock()
-
-    Mac=np.zeros((20,20))
-    n,m=np.shape(Mac)
-    for i in range(n):
-        for j in range(m):
-            Mac[i][j]=1+3*i+3*j
-    D=Dob2(Mac)
-    print(np.shape(D),"\n")
-    D = Dob2(D)
-    print(np.shape(D), "\n")
-    D = Dob2(D)
-    print(np.shape(D), "\n")
-    D = Dob2(D)
-    print(np.shape(D), "\n")
-    D = Dob2(D)
-    print(np.shape(D), "\n")
-    D = Dob2(D)
-    print(np.shape(D), "\n")
-
-    T0=time.clock()
-    print(T0-T1)
+    print(TablicaFki(0.33333,1,5,5))
+    print("X")
+    print(TablicaFki(1,0.33333,5,5))

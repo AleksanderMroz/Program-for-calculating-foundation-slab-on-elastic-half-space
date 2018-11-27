@@ -58,9 +58,6 @@ def TabWsp2(m,n,a,b):
 
     Fki=np.zeros((m,n))
     Fki[0][0]=CAL.SamNaSiebie(a,b)
-
-
-
     return Fki
 
 #Funkcja przyjmuje tablcię Fki oraz ile jednostek w prawo oraz w góre od punktu przyłożenia obciążenia jest dany sektor

@@ -3,7 +3,6 @@ import numpy as np
 from sympy import *
 import time as time
 init_printing(use_unicode=True)
-import sys
 import Zemoczkin as ZE
 import AproxFunkKsztal as AFK
 
@@ -464,8 +463,8 @@ def MacierzWIJ(lm,ln,E0,v,a,b):
     y=0
     for k in Wij:
         for l in k:
-            Wij2[y][x]=l
-            Wij2[y][x]=l*((1-v**2)/(3.141592653589793*E0))
+            Wij2[x][y]=l
+            Wij2[x][y]=l*((1-v**2)/(3.141592653589793*E0))
             Pivot=Pivot+1
             if(x==wym-1):
                 x=0
@@ -637,3 +636,8 @@ def ZEM_SIN(A,B):
 
 
 
+
+if __name__ == '__main__':
+   Wij1 = MacierzWIJ(4,2,1,0,0.5,1)
+   Wij2 = MacierzWIJ(4,2, 1, 0, 1, 0.5)
+   print(Wij1,Wij2)

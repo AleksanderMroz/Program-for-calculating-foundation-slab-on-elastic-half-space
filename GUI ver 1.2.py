@@ -114,19 +114,19 @@ class StartPage(tk.Frame):
         l2.grid(column=4, row=8)
         #######################################
 
-        Sc = tk.Label(self, text="Podaj sciezke \n zapisu pliku z wynikami\n"
-                                 "np: d:\FolderX\Wyniki1.txt",
-                      font=("Arial", 12))
-        Sc.grid(column=0, row=10)
+        ##Sc = tk.Label(self, text="Podaj sciezke \n zapisu pliku z wynikami\n"
+         ##                        "np: d:\FolderX\Wyniki1.txt",
+         ##             font=("Arial", 12))
+        ##Sc.grid(column=0, row=10)
 
-        ttt1 = tk.Entry(self, width=10)
-        ttt1.grid(column=1, row=10)
+        ##ttt1 = tk.Entry(self, width=10)
+        ##ttt1.grid(column=1, row=10)
 
         btn0 = tk.Button(self, text="OBLICZENIA",
                          command=lambda: controller.Oblicz(txt3.get(), txt4.get(), txt5.get(), txt6.get(),
                                                            txt7.get(),
                                                            tx1.get(), tx2.get(), spin1.get(), spin2.get(), controller.F,
-                                                           ttt1.get(), controller.D))
+                                                           "null", controller.D))
         btn0.grid(column=6, row=2)
 
         l3 = tk.Label(self, text="Wprowadź obciążenie:",
@@ -159,11 +159,11 @@ class SeaofBTCapp(tk.Tk):
     Krotka = None
     F = [[0, 0, 0]]
     D = [[10000000000000000, 0, 0, 0]]
-    MXX = "BLAH"
-    MYY = "MEH"
-    MXY = "WHAAAAT"
-    R = "WUT"
-    W = "NOPE"
+    MXX = "XXX"
+    MYY = "XXX"
+    MXY = "XXX"
+    R = "XXX"
+    W = "XXX"
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)

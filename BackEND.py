@@ -41,7 +41,6 @@ def Oblicz(*args):
     for i in range(le):
         w1, w2, w3, w4 = mp[i]
 
-        # print(w1 - 1, w2 - 1, w3 - 1, w4 - 1)
 
         T0 = time.clock()
         F0 = KE.ObcPInit(lw)
@@ -51,8 +50,6 @@ def Oblicz(*args):
         F0 = KE.ObciazenieP(F0, 0.25, w4 - 1)
         Q0 = KE.Q0Chol(K0, F0)
 
-        # print(Q0)
-        # print(U)
         X = 0
         Y = 0
         Uk = np.zeros((n, m))
@@ -63,18 +60,17 @@ def Oblicz(*args):
                 X = 0
                 Y = Y + 1
 
-        # print(Uk)
+
         UL = KE.LiniaWpływu(Uk)
 
         Yij[i][:] = UL
         T1 = time.clock()
         print("Pętla: ", i + 1, " trwała :", T1 - T0)
-        # print("STOP STOP")
+
 
     ####DOBRA TERAZ LECIMY Z JAKIMŚ PRZYKLADOWYM OBCIAZENIEM
     F0 = KE.ObcPInit(le)
 
-    # F0 = KE.ObciazenieP(F0, WarP, 4)
 
     def Przylozdo1(X, Y, mp, wsp, Ele):
         w1, w2, w3, w4 = mp
@@ -92,7 +88,7 @@ def Oblicz(*args):
                 F0 = KE.ObciazenieP(F0, WarP, Ele)
                 return F0
 
-    print("No Dobra")
+
     F = TabelaF
 
     max, _ = np.shape(F)
@@ -109,18 +105,11 @@ def Oblicz(*args):
     pn = n
 
     Binit = KE.MacierzB(Yij, pm, pn, a, b)
-    # print("Macierz B")
-    # print(type(Binit))
-    B = np.matrix(Binit)
-    # print(type(B))
-    # print(B.shape)
 
-    # print("WEKTOR P")
-    # print(type(P0uzyt))
+    B = np.matrix(Binit)
+
     P = np.matrix(P0uzyt)
     P = np.transpose(P)
-    # print(type(P))
-    # print(P.shape)
 
     X2 = B * P
     B = np.zeros((P.shape))
@@ -139,23 +128,14 @@ def Oblicz(*args):
         for j in range(len(Gornictwo)):
             B[j][0] -= Gornictwo[j]
 
-    # print()
-    # print(type(B))
+
 
     Wij = KE.MacierzWIJ(m, n, E0G, vG, a, b)
-    # PODZIAL WEZLOW po ile 25 cm bloczków jest
 
     A = KE2.MacierzA(Wij, Yij, m, n, a, b, a0, b0)
-    print("MACIERZ A")
-    print(type(A), type(B))
-    # A = Matrix(A)
-    print(type(A), type(B))
-    print(A.shape, B.shape)
 
     BRZA_MROZ = np.linalg.lstsq(A, B,0)
-    print("WYNIK-ale czy dobre ?")
-    # print(type(BRZA_MROZ))
-    print(np.shape(BRZA_MROZ[0]))
+
     WYNIK = BRZA_MROZ[0]
 
     TEM = 0
@@ -178,17 +158,12 @@ def Oblicz(*args):
             Wyn[i][j] = WYNIK[Tem]
             Tem += 1
 
-
-    # for i in range(n):
-    # print(Wyn[i][:])
-
     print("U1,U2,U3")
     print(WYNIK[-3:])
     print(TEM)
 
     #### Do ZWROTU ####
     Ugiecia = WYNIK[-3:]
-    # Wyn ( Macierz R)
 
     ###############################################################################################
 
@@ -268,8 +243,6 @@ def Oblicz(*args):
             UFIN[i][j] = Q0[Mark]
             Mark += 3
 
-    # print("UGIECIA", UFIN)
-    # print("Q0",Q0)
     print(len(Q0))
 
     ######################################################################################
@@ -354,7 +327,7 @@ def Oblicz(*args):
         print()
 
         #############################################################################3
-    print("MXY")
+
     MXY = np.zeros((n, m))
     for i in range(le):
         MXY = KE2.WyznaczenieMxy(MXY, Q0, 0, 0, a, b, mp, i, m, n, v)
@@ -376,7 +349,6 @@ def Oblicz(*args):
             Tem += 1
         print()
 
-    #txt = "d:\ZEM_SIN\WynikiDoOddania.txt"
     KE2.drukuj(Wyn, Wosiadania, MXX, MYY, MXY, a0, b0, h0, m, n, E0, v, E0G, vG, txt)
 
     return Wyn, Wosiadania, MXX, MXY, MYY
